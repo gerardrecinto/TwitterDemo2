@@ -22,7 +22,8 @@ class TimelineViewController: UIViewController, UITableViewDelegate, UITableView
         tableView.delegate = self
         
         tableView.rowHeight = UITableViewAutomaticDimension
-        tableView.estimatedRowHeight = 500
+        tableView.estimatedRowHeight = 250
+      
         
         APIManager.shared.getHomeTimeLine { (tweets, error) in
             if let tweets = tweets {
@@ -38,7 +39,10 @@ class TimelineViewController: UIViewController, UITableViewDelegate, UITableView
         return tweets.count
     }
     
-    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+  @IBAction func onComposeButton(_ sender: Any) {
+    performSegue(withIdentifier: "composeIdentifier", sender: self)
+  }
+  func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "TweetCell", for: indexPath) as! TweetCell
         
         cell.tweet = tweets[indexPath.row]

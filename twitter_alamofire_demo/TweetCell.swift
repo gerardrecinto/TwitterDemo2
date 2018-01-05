@@ -12,8 +12,9 @@ import AlamofireImage
 
 class TweetCell: UITableViewCell {
     
-    @IBOutlet weak var tweetTextLabel: UILabel!
-  @IBOutlet weak var profileButton: UIButton!
+  @IBOutlet weak var profileButton: UIImageView!
+  @IBOutlet weak var tweetTextLabel: UILabel!
+  //@IBOutlet weak var profileButton: UIButton!
   @IBOutlet weak var authorButton: UILabel!
   @IBOutlet weak var screennameLabel: UILabel!
   @IBOutlet weak var dateLabel: UILabel!
@@ -88,8 +89,11 @@ class TweetCell: UITableViewCell {
           rtCount = tweet.retweetCount
           setButtonCount()
           
-          profileButton.af_setImage(for: .normal, url: tweet.profileUrl!)
-          
+        //  profileButton.af_setImage(for: .normal, url: tweet.profileUrl!)
+          profileButton.af_setImage(withURL: tweet.profileUrl!)
+         // myButton.imageView?.contentMode = .scaleAspectFit
+      //    profileButton.imageView?.contentMode = .scaleAspectFill
+        //  profileButton.imageView?.updateConstraintsIfNeeded()
         }
     }
     
@@ -115,8 +119,13 @@ class TweetCell: UITableViewCell {
   }
   override func awakeFromNib() {
         super.awakeFromNib()
-        // Initialization code
+        authorButton.preferredMaxLayoutWidth = authorButton.frame.size.width// Initialization code
     }
+  override func layoutSubviews() {
+    super.layoutSubviews()
+    authorButton.preferredMaxLayoutWidth = authorButton.frame.size.width// Initialization code
+
+  }
     
     override func setSelected(_ selected: Bool, animated: Bool) {
         super.setSelected(selected, animated: animated)
